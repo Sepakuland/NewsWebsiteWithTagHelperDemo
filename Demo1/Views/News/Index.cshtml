@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NewsViewModel
+    <div class="row">
+        <div class="col-4 ">
+            @(await Component.InvokeAsync("Ads"))
+        </div>
+        <div class="col-6 ">
+            <div>
+                <h1>مشروح اخبار</h1>
+                @foreach (var item in Model.News)
+                {
+            <div class="card pt-2">
+                <div class="card-header">
+                    <img src="@item.ImagePath" class="img-thumbnail" alt="خبر مهم">
+                    @item.Title
+                </div>
+                <div class="card-body">@item.Summery</div>
+                <div class="card-footer"><a href="~/news/CreateNews">بیشتر بخوانید</a></div>
+            </div>
+                }
+            </div>
+        </div>
+        <div class="col-2 ">
+          @Html.Partial("_Search")
+          @Html.Partial("_CategoryList",Model.Categories)
+        </div>
+    </div>
+    <div>
+        <a class="btn btn-primary" href="~/news/CreateNews">اضافه کردن اخبار</a>
+        <a class="btn btn-primary" href="~/news/CreateNews">حذف خبر</a>
+    </div>
+
